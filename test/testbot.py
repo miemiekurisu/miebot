@@ -15,15 +15,16 @@ token = cfg.get('token','token')
 print token
 bot = telebot.TeleBot(token)
 
-@bot.message_handler(commands=['googefor'])
+@bot.message_handler(commands=['googlefor'])
 def search_test(message):
     markup = types.ForceReply(selective=False)
+    print message.text
     bot.send_message(message.chat.id,'send me words to search:', reply_markup=markup)
     
 
-# @bot.message_handler(func=lambda message: True)
-# def echo_all(message):
-#     bot.reply_to(message, message.text)
+@bot.message_handler(func=lambda message: True)
+def echo_all(message):
+    print message
 
 
     
