@@ -23,10 +23,10 @@ def send_welcome(message):
 def echo_all(message):
     bot.reply_to(message, message.text)
 
-@bot.message_handler(commands=['/googefor'])
+@bot.message_handler(commands=['googefor'])
 def search_test(message):
     markup = types.ForceReply(selective=False)
-    bot.send_message( 'send me words to search:', reply_markup=markup)
+    bot.reply_to(message.getMessageID(),'send me words to search:', reply_markup=markup)
     
     
 if __name__ == '__main__':
