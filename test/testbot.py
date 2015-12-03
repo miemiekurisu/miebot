@@ -6,13 +6,14 @@ Created on 2015年12月3日
 '''
 import telebot
 import ConfigParser
+from telebot import types
 
 cfg = ConfigParser.SafeConfigParser()
 with open('../settings.cfg','r') as cfgfile:
     cfg.readfp(cfgfile)
 token = cfg.get('token','token')
 print token
-bot = telebot.TeleBot(cfg)
+bot = telebot.TeleBot(token)
 
 @bot.message_handler(commands=['start', 'help'])
 def send_welcome(message):
@@ -21,6 +22,11 @@ def send_welcome(message):
 @bot.message_handler(func=lambda message: True)
 def echo_all(message):
     bot.reply_to(message, message.text)
+
+@bot.message_handler(commands=['/googefor'])
+def search_test(message):
+    markup = types.ForceReply(selective=False)
+    bot.send_message( 'send me words to search:', reply_markup=markup)
     
     
 if __name__ == '__main__':
